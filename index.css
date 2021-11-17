@@ -7,7 +7,8 @@
 /* Background image */
 header{
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     background-image: linear-gradient(to bottom, rgba(154, 155, 150, 0.5), rgba(154, 155, 150, 0.5)), url(images/painter.jpg);
     background-repeat: no-repeat;
     background-size: cover;
@@ -19,15 +20,32 @@ header{
     display: flex;
     align-items: center;
     text-align: center;
-    margin-top: 2rem;
     font-size: 1.8rem;
     background-color: #404040;
     width: 7rem;
+    margin-top: 2rem;
     height: 7rem;
     border: 4px solid #fff;
     border-radius: 7rem;
     color: white;
     box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.25);
+}
+
+/* Human masterpiece text */
+div p{
+    color: #03254c;
+    font-size: 4rem;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 2.5rem 0 1rem;
+}
+/* horizontal line */
+hr{
+    background-color: #404040;
+    height: 0.8rem;
+    border: none;
 }
 /* Footer section */
 .footer{
