@@ -72,42 +72,56 @@ a button{
     color: #03254c;
     font-size: 1.4rem;
 }
-/* Human masterpiece text */
-.tag p{
-    color: #03254c;
-    font-size: 4rem;
-    display: flex;
-    text-align: center;
-    justify-content: center;
-    flex-direction: column;
-    margin: 2.5rem 0 1rem;
-}
-/* horizontal line */
-hr{
-    background-color: #404040;
-    height: 0.8rem;
-    border: none;
-}
 
-/* Icons that are links */
-.link-icons{
-    display: flex;
-    align-content: center;
-}
-.link-icons a{
-    padding: 1.5rem;
-    text-decoration: none;
-}
-.link-icons img{
-    height: 7rem;
-    width: 7rem;
-    filter: invert(14%) sepia(15%) saturate(5618%) hue-rotate(188deg) brightness(93%) contrast(105%);
-}
-div p{
+/* Log in and Signup Form */
+.reg{
     display: flex;
     flex-direction: column;
+    align-items: center;
+    width: 25rem;
+    height: 32rem;
+    color: #000;
+    margin: 5rem;
+    padding: 60px 30px;
+    box-sizing: border-box;
+    box-shadow: 8px 8px 50px #000;
+}
+.reg p{
+    margin: 0;
+    padding: 0;
+    font-size: 30px;
     color: #03254c;
-    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 8%;
+}
+.reg input{
+    width: 100%;
+    margin-bottom: 20px;
+}
+.reg input[type=text], .reg input[type=password]{
+    border: none;
+    border-bottom: 1px solid #ddd;
+    background: transparent;
+    outline: none;
+    height: 50px;
+    font-size: 16px;
+    opacity: 1;
+    color: #404040;
+}
+.reg input[type=submit]{
+    border: none;
+    outline: none;
+    height: 40px;
+    background: #03254c;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+}
+.reg input[type=submit]:hover{
+    cursor: pointer;
+}
+.bottom-text p input{
+    width: 5rem;
 }
 
 /* Footer section */
