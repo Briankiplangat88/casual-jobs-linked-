@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="profile.css" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
+			rel="stylesheet"
+		/>
+		<title>User Profile</title>
+	</head>
+	<body>
+		<div class="container">
+			<header>
+				<div class="logo">
+					<p><span>Casual</span><span>Jobs</span></p>
+				</div>
+			</header>
+			<main>
+				<h2>User Profile</h2>
+				<section class="profile">
+					<div class="profile-img">
+						<img src="" alt="profile-pic" />
+						<h2 class="profile-name">User Name</h2>
+					</div>
+					<div class="profile-form">
+						<form action="" class="profile-form">
+							<input type="file" name="profilePic" id="profile-pic" />
+							<div class="username">
+								<div>
+									<label for="firstName">First Name</label>
+									<input type="text" name="firstName" id="firstName" required/>
+								</div>
+								<div>
+									<label for="lastName">Last Name</label>
+									<input type="text" name="lastName" id="lastName" required/>
+								</div>
+							</div>
+							<label for="email">Email</label>
+							<input
+								type="email"
+								name="email"
+								id="email"
+								placeholder="name@example.com"
+                                required
+							/>
+							<label for="phone-no">Phone No:</label>
+							<input
+								type="text"
+								name="phone"
+								id="phone"
+								placeholder="0700000000"
+                                required
+							/>
+                            <label>Expertise</label>
+                            <select name="expertise" id="expertise">
+                                <option value="carpentry">Carpentry</option>
+                                <option value="electrical">
+                                    Electrical Appliances
+                                </option>
+                                <option value="masonry">Masonry</option>
+                                <option value="plumbing">Plumbing</option>
+                                <option value="painting">Painting</option>
+                                <option value="welding">Welding</option>
+                            </select>
+							<label for="tagline">Tagline</label>
+							<input type="text" name="tagline" id="tagline" />
+							<button type="submit">Save</button>
+						</form>
+					</div>
+				</section>
+			</main>
+			<footer>
+				<p>Copyright &copy; 2021</p>
+			</footer>
+		</div>
+		<script src="services.js" type="module"></script>
+	</body>
+</html>
