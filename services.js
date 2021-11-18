@@ -5,17 +5,11 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.4.1/firebase
 import {
 	getFirestore,
 	collection,
-	addDoc,
 	getDocs,
+	query,
+	where,
 } from "https://www.gstatic.com/firebasejs/9.4.1/firebase-firestore.js";
 
-// Import Cloud Storage
-import {
-	getStorage,
-	ref,
-	uploadBytesResumable,
-	getDownloadURL,
-} from "https://www.gstatic.com/firebasejs/9.4.1/firebase-storage.js";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -33,102 +27,46 @@ const app = initializeApp(firebaseConfig);
 // Set up Database
 const db = getFirestore(app);
 
-// Add Collect User Details
-let firstName = document.querySelector("#firstName");
-let lastName = document.querySelector("#lastName");
-let email = document.querySelector("#email");
-let phone = document.querySelector("#phone");
-let tagline = document.querySelector("#tagline");
-let expertise = document.querySelector('#expertise')
 
-// User Profile Pic
-let profilePic = document.querySelector("#profile-pic");
 
-// Submit Form Details
-const form = document.querySelector(".profile-form");
+/** Get Workers */
 
-// Upload Image to Firebase Storage
-function addProfileToStorage(file) {
-	let imgUrl = "";
+const getWorkers = async (className) => {
+	let workersContainer = document.querySelector(`.${className}`);
+	const capenters = []
+	const workersQuery = query(collection(db, 'users'), where('expertise', '==', `${className}`));
 
-	const storage = getStorage();
-
-	const imageRef = ref(storage, "images/" + file.name);
-
-	let types = ["image/png", "image/jpeg", "image/jpg"];
-
-	if (!types.includes(file.type)) {
-		alert("Please Add a valid image");
-	} else {
-		const uploadTask = uploadBytesResumable(imageRef, file);
-
-		uploadTask.on(
-			"state_changed",
-			(snapshot) => {
-				// Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-				const progress =
-					(snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-				console.log("Upload is " + progress + "% done");
-				switch (snapshot.state) {
-					case "paused":
-						console.log("Upload is paused");
-						break;
-					case "running":
-						console.log("Upload is running");
-						break;
-				}
-			},
-			(error) => {
-				console.error(error.message);
-			},
-			() => {
-				// Upload completed successfully, now we can get the download URL
-				getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-					i;
-				});
-			}
-		);
-	}
-
-	return imgUrl;
+	const querySnapshot = await getDocs(workersQuery);
+	querySnapshot.forEach( async(doc) => {
+		console.log(doc.data())
+		let data = await doc.data()
+		capenters.push(data)
+		capenters.forEach((item) => {
+			let workerCard = `<div class="cards"><div><img src="" alt="avatar_url" /><div><h2>${item.firstName} ${item.lastName} </h2><p><strong>Location : </strong>  ${item.location} </p><p><strong>Telephone : </strong> ${item.phone} </p><p><strong>Email : </strong> ${item.email} </p></div></div><p> ${item.tagline} </p></div>`;
+			workersContainer.insertAdjacentHTML("afterbegin", workerCard);
+		})
+	});
 }
 
-// Add Data to Firebase Firestore
-async function addUserProfile(data) {
-	try {
-		const docRef = await addDoc(collection(db, "users"), data);
-		console.log("Document written with ID", docRef.id);
-	} catch (err) {
-		console.error("Error adding document", err);
-	}
-}
 
-form.addEventListener("submit", (e) => {
-	e.preventDefault();
+// Get All Capenters 
+getWorkers('capentry')
 
-	// let imageFile = profilePic.files[0];
+// Get All Painters 
+getWorkers('painting')
 
-	// let avatar_url = addProfileToStorage(imageFile);
+// Get All Plumbers 
+getWorkers('plumbing')
 
-	let person = {
-		firstName: firstName.value,
-		lastName: lastName.value,
-		email: email.value,
-		phone: phone.value,
-    expertise: expertise.value,
-		tagline: tagline.value,
-		// avatar_url,
-	};
+// Get All Masons
+getWorkers('masonry')
 
+// Get All Electrical Workers
+getWorkers('electrical')
 
-  addUserProfile(person);
+// Get All Welders
+getWorkers('welding')
 
-  firstName.value = ""
-  lastName.value = "";
-  email.value = "";
-  phone.value = ""
-  tagline.value = "";
-});
 
 
 
@@ -174,67 +112,3 @@ form.addEventListener("submit", (e) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// async function addData(){
-//   let worker = {
-//     firstName: 'Charles',
-//     lastName: 'Babbage',
-//     location: 'London',
-//     field: 'capentry',
-//     phone_no: '0712345678',
-//     email: 'charlie@gmail.com',
-//     tagline: "I invented carpentry"
-//   }
-
-//
-// }
-
-// addData();
-
-// async function getData(){
-//   const casuals = [];
-//   const querySnapshot = await getDocs(collection(db, 'casuals'))
-//   querySnapshot.forEach(doc => casuals.push(doc.data()))
-//   console.log(casuals)
-// }
-
-// getData()
-
-// console.log(getData())
-// const casuals = getData()
-// console.log(casuals)
-
-/* Add Cards to a Container */
-// let workersContainer = document.querySelector(".casual-workers");
-
-let workerCard = `<div class="cards"><div><img src="" alt="avatar_url" /><div><h2>Omondi Timon</h2><p><strong>Location : </strong> Nairobi</p><p><strong>Telephone : </strong> 0712345678</p><p><strong>Email : </strong> jdoe@example.com</p></div></div><p>Quality and Satisfaction beyond your expectations</p></div>`;
-
-// let workersArr = [1, 2, 3, 4, 5, 6];
-
-// workersArr.forEach((ele, ind) => {
-// 	workersContainer.insertAdjacentHTML("afterbegin", workerCard);
-// });
