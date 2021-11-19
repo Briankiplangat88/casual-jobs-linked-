@@ -19,6 +19,12 @@ import {
 	getDownloadURL,
 } from "https://www.gstatic.com/firebasejs/9.4.1/firebase-storage.js";
 
+// Import Firebase Auth
+import {
+	getAuth,
+	onAuthStateChanged,
+} from "https://www.gstatic.com/firebasejs/9.4.1/firebase-auth.js";
+
 // Your web app's Firebase configuration
 const firebaseConfig = {
 	apiKey: "AIzaSyA7a-vBlhLUeZXQ6TRyxvq8G6wraMKY3XI",
@@ -31,6 +37,21 @@ const firebaseConfig = {
 
 // Initialise Firebase
 const app = initializeApp(firebaseConfig);
+
+// Set up Authentication
+const auth = getAuth();
+
+const isAuthenticated = async() => {
+	const user = await onAuthStateChanged(auth)
+
+	if(user){
+		localStorage.setItem(user.user.uid)
+	}else {
+		localStorage.removeItem('userId')
+	}
+}
+
+isAuthenticated();
 
 // Set up Database
 const db = getFirestore(app);
@@ -106,7 +127,7 @@ function addUserProfile() {
 						expertise: expertise.value,
 						tagline: tagline.value,
 						avatar_url: downloadURL,
-                        // userId:
+                        userId: localStorage.getItem('userId')
 					};
                     // console.log(person)
                     loadToFirestore(person)
