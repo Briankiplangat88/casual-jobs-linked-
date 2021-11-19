@@ -41,25 +41,40 @@ const app = initializeApp(firebaseConfig);
 // Set up Authentication
 const auth = getAuth();
 
-const isAuthenticated = async() => {
-	const user = await onAuthStateChanged(auth)
-
-	if(user){
-		localStorage.setItem(user.user.uid)
-	}else {
-		localStorage.removeItem('userId')
+const isAuthenticated = async () => {
+	console.log("Im runing");
+	// console.log(auth);
+	try {
+		const user = await onAuthStateChanged();
+		console.log(user)
+		if (user) {
+			localStorage.setItem("userId", user.user.uid);
+		} else {
+			localStorage.removeItem("userId");
+			location.href = 'localstorage:5500/login'
+		}
+	} catch (error) {
+		console.log(error);
 	}
-}
+};
 
 isAuthenticated();
 
 // Set up Database
 const db = getFirestore(app);
 
+// Get Logged in User
+const getUserProfile =  async () => {
+	let profileQuery = query(collection(db, 'users'), where('userId', '==', `${localStorage.getItem('userId')}`));
+
+	let profileSnapshot = await getDocs(profileQuery);
+	console.log(profileSnapshot);
+}
+
 // Submit Form Details
 const form = document.querySelector(".profile-form");
 
-/** Add User Data to a Database */ 
+/** Add User Data to a Database */
 
 // Load Data to Firestore
 // Add Data to Firebase Firestore
@@ -84,7 +99,6 @@ function addUserProfile() {
 
 	// Image File
 	let imgFile = profilePic.files[0];
-
 
 	const storage = getStorage();
 
@@ -127,26 +141,32 @@ function addUserProfile() {
 						expertise: expertise.value,
 						tagline: tagline.value,
 						avatar_url: downloadURL,
-                        userId: localStorage.getItem('userId')
+						userId: localStorage.getItem("userId"),
 					};
-                    // console.log(person)
-                    loadToFirestore(person)
+					// console.log(person)
+					loadToFirestore(person);
 				});
 			}
 		);
 	}
 }
 
-
-
 form.addEventListener("submit", (e) => {
 	e.preventDefault();
 
 	addUserProfile();
 
-	// firstName.value = "";
-	// lastName.value = "";
-	// email.value = "";
-	// phone.value = "";
-	// tagline.value = "";
+	let firstName = document.querySelector("#firstName");
+	let lastName = document.querySelector("#lastName");
+	let email = document.querySelector("#email");
+	let phone = document.querySelector("#phone");
+	let tagline = document.querySelector("#tagline");
+	let expertise = document.querySelector("#expertise");
+
+	firstName.value = "";
+	lastName.value = "";
+	email.value = "";
+	phone.value = "";
+	tagline.value = "";
+	expertise.value = "";
 });
