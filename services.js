@@ -42,7 +42,7 @@ const getWorkers = async (className) => {
 		let data = await doc.data()
 		capenters.push(data)
 		capenters.forEach((item) => {
-			let workerCard = `<div class="cards"><div><img src="" alt="avatar_url" /><div><h2>${item.firstName} ${item.lastName} </h2><p><strong>Location : </strong>  ${item.location} </p><p><strong>Telephone : </strong> ${item.phone} </p><p><strong>Email : </strong> ${item.email} </p></div></div><p> ${item.tagline} </p></div>`;
+			let workerCard = `<div class="cards"><div><img src=${item.avatar_url} alt="avatar_url" /><div><h2>${item.firstName} ${item.lastName} </h2><p><strong>Location : </strong>  ${item.location} </p><p><strong>Telephone : </strong> ${item.phone} </p><p><strong>Email : </strong> ${item.email} </p></div></div><p> ${item.tagline} </p></div>`;
 			workersContainer.insertAdjacentHTML("afterbegin", workerCard);
 		})
 	});

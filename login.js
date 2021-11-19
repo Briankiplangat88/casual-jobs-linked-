@@ -31,7 +31,7 @@ const login = async (email, password) => {
 		const user = await signInWithEmailAndPassword(auth, email, password);
 		console.log(user);
 		localStorage.setItem("userId", user.user.uid);
-		location.href = "localhost:5500/profile";
+		location.href = "http://localhost:5500/profile.html";
 	} catch (error) {
 		console.log(error);
 	}

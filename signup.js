@@ -32,7 +32,7 @@ const addUser = async (email, password) => {
 		const user = await createUserWithEmailAndPassword(auth, email, password);
 		console.log(user.user.uid);
 		localStorage.setItem('userId',user.user.uid);
-		window.location.href = 'http://localhost:5500/profile'
+		window.location.href = 'http://localhost:5500/profile.html'
 	} catch (error) {
 		console.log(error);
 		alert(error.message)

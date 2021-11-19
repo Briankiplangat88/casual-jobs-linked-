@@ -7,11 +7,11 @@
 
 .container {
 	background-image: linear-gradient(
-			to left,
-			rgba(0, 0, 0, 0.2),
-			rgba(0, 0, 0, 0.45)
+			to bottom,
+			rgba(255, 255, 255, 0.5),
+			rgba(255, 255, 255, 0.5)
 		),
-		url("images/painter.jpg");
+		url(images/painter.jpg);
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: top left;
@@ -25,15 +25,19 @@ header {
 }
 
 header div {
-	width: 7rem;
-	height: 7rem;
-	background-color: #404040;
-	border-radius: 50%;
-	border: 4px solid white;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin: 2rem 0;
+	 display: flex;
+    align-items: center;
+    text-align: center;
+    font-size: 1.8rem;
+    background-color: #404040;
+    width: 7rem;
+    height: 7rem;
+    margin-top: 2rem;
+	padding: .4rem;
+    border: 4px solid #fff;
+    border-radius: 7rem;
+    color: white;
+    box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.9);
 }
 
 header div p {
@@ -67,10 +71,11 @@ section {
 
 .cards {
 	width: 30%;
-	height: 350px;
+	height: 400px;
 	margin: 1rem;
-	background-color: #404040;
+	background-color: rgba(64, 64, 64, 0.7);
 	color: white;
+	border-top-left-radius: 1.2rem;
 }
 
 .cards > div {
@@ -88,20 +93,28 @@ section {
 	justify-content: space-around;
 }
 
-.cards > div > div > h2 {
-    font-family: 'Roboto', sans-serif;
-    letter-spacing: .1rem;
+.cards img {
+	width: 50%;
+	/* height: 50%; */
+	border-radius: 1.2rem;
+	border-bottom-left-radius: 0;
+	border-top-right-radius: 0;
 }
 
-.cards > div > div > p > strong{
-    font-family: 'Roboto', sans-serif;
-    letter-spacing: .1rem;
+.cards > div > div > h2 {
+	font-family: "Roboto", sans-serif;
+	letter-spacing: 0.1rem;
+}
+
+.cards > div > div > p > strong {
+	font-family: "Roboto", sans-serif;
+	letter-spacing: 0.1rem;
 }
 
 .cards > p {
 	text-align: center;
 	margin-top: 0.5rem;
-    font-family: 'Roboto', sans-serif;
+	font-family: "Roboto", sans-serif;
 }
 
 /* Footer Section */

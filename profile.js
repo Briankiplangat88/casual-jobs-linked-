@@ -41,35 +41,38 @@ const app = initializeApp(firebaseConfig);
 // Set up Authentication
 const auth = getAuth();
 
-const isAuthenticated = async () => {
-	console.log("Im runing");
-	// console.log(auth);
-	try {
-		const user = await onAuthStateChanged();
-		console.log(user)
-		if (user) {
-			localStorage.setItem("userId", user.user.uid);
-		} else {
-			localStorage.removeItem("userId");
-			location.href = 'localstorage:5500/login'
-		}
-	} catch (error) {
-		console.log(error);
-	}
-};
+// const isAuthenticated = async () => {
+// 	console.log("Im runing");
+// 	// console.log(auth);
+// 	try {
+// 		const user = await onAuthStateChanged();
+// 		console.log(user)
+// 		if (user) {
+// 			localStorage.setItem("userId", user.user.uid);
+// 		} else {
+// 			localStorage.removeItem("userId");
+// 			location.href = 'localstorage:5500/login'
+// 		}
+// 	} catch (error) {
+// 		console.log(error);
+// 	}
+// };
 
-isAuthenticated();
+// isAuthenticated();
 
 // Set up Database
 const db = getFirestore(app);
 
 // Get Logged in User
-const getUserProfile =  async () => {
-	let profileQuery = query(collection(db, 'users'), where('userId', '==', `${localStorage.getItem('userId')}`));
+const getUserProfile = async () => {
+	let profileQuery = query(
+		collection(db, "users"),
+		where("userId", "==", `${localStorage.getItem("userId")}`)
+	);
 
 	let profileSnapshot = await getDocs(profileQuery);
 	console.log(profileSnapshot);
-}
+};
 
 // Submit Form Details
 const form = document.querySelector(".profile-form");
@@ -94,6 +97,7 @@ function addUserProfile() {
 	let lastName = document.querySelector("#lastName");
 	let email = document.querySelector("#email");
 	let phone = document.querySelector("#phone");
+	let location = document.querySelector("#location");
 	let tagline = document.querySelector("#tagline");
 	let expertise = document.querySelector("#expertise");
 
@@ -138,13 +142,15 @@ function addUserProfile() {
 						lastName: lastName.value,
 						email: email.value,
 						phone: phone.value,
+						location: location.value,
 						expertise: expertise.value,
 						tagline: tagline.value,
 						avatar_url: downloadURL,
 						userId: localStorage.getItem("userId"),
 					};
-					// console.log(person)
+					console.log(person);
 					loadToFirestore(person);
+					alert("Profile has been updated");
 				});
 			}
 		);
@@ -156,17 +162,17 @@ form.addEventListener("submit", (e) => {
 
 	addUserProfile();
 
-	let firstName = document.querySelector("#firstName");
-	let lastName = document.querySelector("#lastName");
-	let email = document.querySelector("#email");
-	let phone = document.querySelector("#phone");
-	let tagline = document.querySelector("#tagline");
-	let expertise = document.querySelector("#expertise");
+	// let firstName = document.querySelector("#firstName");
+	// let lastName = document.querySelector("#lastName");
+	// let email = document.querySelector("#email");
+	// let phone = document.querySelector("#phone");
+	// let tagline = document.querySelector("#tagline");
+	// let expertise = document.querySelector("#expertise");
 
-	firstName.value = "";
-	lastName.value = "";
-	email.value = "";
-	phone.value = "";
-	tagline.value = "";
-	expertise.value = "";
+	// firstName.value = "";
+	// lastName.value = "";
+	// email.value = "";
+	// phone.value = "";
+	// tagline.value = "";
+	// expertise.value = "";
 });
